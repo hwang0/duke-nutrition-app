@@ -113,7 +113,7 @@ def load_rag_system():
   #  st.write(f" Using device: {device}")
     
   #  st.write(" Step 5/5: Initializing RAG system...")
-    api_key = os.getenv('OPENAI_API_KEY')
+    api_key = st.secrets.get("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
     if not api_key:
         st.error("OpenAI API key not found!")
         st.stop()
@@ -233,7 +233,7 @@ use_conversation_context = st.checkbox("Use conversation context", value=True,
 #Get recommendations button
 if st.button("Get Recommendations", type="primary", use_container_width=True):
     if not query.strip():
-        st.warning("⚠️ Please enter a query!")
+        st.warning("Please enter a query!")
     else:
         with st.spinner("Finding the best meals for you..."):
             try:
