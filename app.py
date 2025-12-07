@@ -113,7 +113,7 @@ def load_rag_system():
   #  st.write(f" Using device: {device}")
     
   #  st.write(" Step 5/5: Initializing RAG system...")
-    api_key = st.secrets.get("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
+    api_key = os.getenv("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY")
     if not api_key:
         st.error("OpenAI API key not found!")
         st.stop()
@@ -175,7 +175,7 @@ with st.sidebar:
     
     for ex_query in example_queries:
         if st.button(ex_query, key=f"ex_{ex_query}"):
-            st.session_state['query'] = ex_query
+            st.session_state['query_input'] = ex_query
     
     st.markdown("---")
     st.header("Conversation")
@@ -201,6 +201,7 @@ with st.sidebar:
         rag.dietary_requirement = None
         rag.excluded_restaurants = []  
         rag.nutrition_goal = None   
+        st.session_state["query_input"] = ""
         st.rerun()
 
 #Display conversation history (ONLY PAST MESSAGES, not the current one)
@@ -215,15 +216,16 @@ if len(st.session_state.messages) > 2:  #Only show if there are previous convers
     st.markdown("---")
 
 #Main interface
-query_text = st.session_state.get('query', '')
+if "query_input" not in st.session_state:
+    st.session_state["query_input"] = ""
 
 query = st.text_area(
-    "What are your nutrition goals?",
-    value=query_text,
+    "🔍 What are your nutrition goals?",
+    value=st.session_state["query_input"],
     placeholder="e.g., I need high protein for cutting, or follow-up like 'What about from Il Forno?'",
     height=100,
     help="Ask a question or follow up on previous recommendations!",
-    key="query_input"
+    key="query_input",
 )
 
 #Simple options - just conversation context checkbox
@@ -232,6 +234,7 @@ use_conversation_context = st.checkbox("Use conversation context", value=True,
 
 #Get recommendations button
 if st.button("Get Recommendations", type="primary", use_container_width=True):
+    query = st.session_state.get("query_input", "")
     if not query.strip():
         st.warning("Please enter a query!")
     else:
