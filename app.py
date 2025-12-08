@@ -222,7 +222,7 @@ if "query_input" not in st.session_state:
 query = st.text_area(
     "🔍 What are your nutrition goals?",
     value=st.session_state["query_input"],
-    placeholder="e.g., I need high protein for cutting, or follow-up like 'What about from Il Forno?'",
+    placeholder="e.g., I need high protein for cutting",
     height=100,
     help="Ask a question or follow up on previous recommendations!",
     key="query_input",
@@ -307,7 +307,6 @@ st.markdown("---")
 st.markdown("""
 <div style='text-align: center; color: #666; padding: 1rem;'>
     <p>CS 372 Final Project | Duke University</p>
-    <p>Built with Sentence Transformers (MiniLM) + GPT-4-mini + RAG architecture</p>
     <p>Multi-turn conversation with context tracking enabled</p>
 </div>
 """, unsafe_allow_html=True)
