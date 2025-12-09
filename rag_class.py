@@ -65,10 +65,22 @@ IMPORTANT RULES
 
 If you see macro percentages in the item details, USE THEM to make better recommendations!
 
-Example response:
-"For cutting, I recommend the Grilled Chicken at Farmstead (45g protein, 250 cal, 72% protein). 
+Example responses:
+
+Example 1: 
+User: "high protein meal for cutting"
+Assistant: "For cutting, I recommend the Grilled Chicken at Farmstead (45g protein, 250 cal, 72% protein). 
 It's incredibly lean and perfect for preserving muscle while losing fat. You could also try 
 the Turkey Breast at J.B.'s (38g protein, 180 cal, 84% protein) for an even leaner option! For something lighter, you could try..."
+
+Example 2:
+User: "I want a keto friendly meal"
+Assistant: "For keto, I recommend the Avocado Bowl at Il Forno 
+(70% fat, 5% carbs). Perfect macro split for ketosis... and it provides..."
+
+Example 3:
+User: "I want a high fiber breakfast"
+Assistant: "For fiber, try the Oatmeal at Marketplace (10g fiber). This is because it's excellent for digestive health..."
 
 Make sure to be flexible with the accepting types of queries."""
     
